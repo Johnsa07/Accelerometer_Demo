@@ -36,6 +36,15 @@ extern FontType_t Terminal_9_12_6;
 extern FontType_t Terminal_18_24_12;
 
 Int32U CriticalSecCntr;
+char countX, countY;
+Int16S X, Y, Z, XVel=0, YVel=0, ZVel=0 , XPos=0, YPos=0, ZPos=0;
+long velX[2], velY[2], accX[2], accY[2], posX[2], posY[2];
+Int32S DegShow = 0, DegShow_h = 1, Delta, DegShowX=0, A,B,C;
+Flo32 Deg, DegX, XGrav, YGrav;
+Flo32 MotorDeg = 0.0;
+Boolean NewData = FALSE;
+Boolean Dir;
+Int32U Steps;
 
 volatile Boolean SysTickFl= TRUE;
 
@@ -80,15 +89,10 @@ void DelayResolution100us(Int32U Dly)
  * Description: main
  *
  *************************************************************************/
+void position(void);
+void move_end_check(void);
 void main(void)
 {
-Int16S X, Y, Z, XVel=0, YVel=0, ZVel=0 , XPos=0, YPos=0, ZPos=0;
-Int32S DegShow = 0, DegShow_h = 1, Delta, DegShowX=0, A,B,C;
-Flo32 Deg, DegX, XGrav, YGrav;
-Flo32 MotorDeg = 0.0;
-Boolean NewData = FALSE;
-Boolean Dir;
-Int32U Steps;
 
   ENTR_CRT_SECTION();
   /* Setup STM32 system (clock, PLL and Flash configuration) */
@@ -201,6 +205,10 @@ Int32U Steps;
       A=(Int32S)XGrav;
       //B=(Int32S)DegX;
       C=XVel;
+      position();
+      A=accX[1];
+      B=velX[1];
+      C=posX[1];
       if(TRUE)//DegShow != DegShow_h
       {
         DegShow_h = DegShow;
@@ -273,5 +281,84 @@ Int32U Steps;
         }
       }
     }
+  }
+}
+
+void position(void)
+{
+  unsigned int count1;
+  count1 = 0;
+  accX[1]=0;
+  accY[1]=0;
+  do
+  {
+    Accl_Get(&X,&Y,&Z);
+    accX[1]=accX[1]+X;
+    accY[1]=accY[1]+Y;
+    count1++;
+  }while (count1!=64); // 64 sums of the acceleration sample
+    
+    accX[1]=accX[1]>>6; //Div by 64
+    accY[1]=accY[1]>>6;
+    
+    accX[1]=accX[1]-22; //Remove the offset due to gravity
+    accY[1]=accY[1]-6;
+    
+    if ((accX[1] <=6)&&(accX[1] >= -6)) //Discrimination window applied
+      {accX[1] = 0;} // to the X axis acceleration
+      //variable
+
+    if ((accY[1] <=3)&&(accY[1] >= -3))
+      {accY[1] = 0;} 
+    
+    //First integration:
+    velX[1]=velX[0] + accX[0] + ((accX[1]-accX[0])>>1);
+    velY[1]=velY[0] + accY[0] + ((accY[1]-accY[0])>>1);
+    
+    //Second integration:
+    posX[1]=posX[0] + velX[0] + ((velX[1]-velX[0])>>1);
+    posY[1]=posY[0] + velY[0] + ((velY[1] - velY[0])>>1);
+    
+    //Current values sent to previous values
+    accX[0]=accX[1];
+    accY[0]=accY[1];
+    velX[0]=velX[1];
+    velY[0]=velY[1];
+    
+    //posX[1]=posX[1]>>18; //Sensibility adjustment
+    posY[1]=posY[1]>>18;
+    
+    //data_tranfer();
+    
+    //posX[1]=posX[1]<<18; //Return original value
+    posY[1]=posY[1]<<18;    
+    
+    move_end_check();
+    
+    posX[0] = posX[1];
+    posY[0] = posY[1];
+
+}
+
+void move_end_check(void)
+{
+  if (accX[1]==0) //Count number of acceleration samples equal to zero
+  {countX++;}
+  else {countX=0;}
+  
+  if (countX >= 25) //if this number exceeds 25, we assume that veocity i zero
+  {
+    velX[1]=0;
+    velX[0]=0;
+  }
+  
+  if (accY[1]==0) //Same as above...
+  {countY++;}
+  else {countY=0;}
+  
+  if (countY >= 25)
+  {
+    velY[1]=0;
+    velY[0]=0;
   }
 }
