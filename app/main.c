@@ -304,7 +304,7 @@ void position(void)
     accX[1]=accX[1]>>6; //Div by 64
     accY[1]=accY[1]>>6;
     
-    accX[1]=accX[1]-22; //Remove the offset due to gravity
+    accX[1]=accX[1]-28; //Remove the offset due to gravity
     accY[1]=accY[1]-6;
     
     if ((accX[1] <=6)&&(accX[1] >= -6)) //Discrimination window applied
@@ -328,7 +328,7 @@ void position(void)
     velX[0]=velX[1];
     velY[0]=velY[1];
     
-    //posX[1]=posX[1]>>18; //Sensibility adjustment
+    //posX[1]=posX[1]>>10; //Sensibility adjustment
     posY[1]=posY[1]>>18;
     
     //data_tranfer();
@@ -340,6 +340,7 @@ void position(void)
     
     posX[0] = posX[1];
     posY[0] = posY[1];
+    posX[1]=posX[1]>>10;
 
 }
 
