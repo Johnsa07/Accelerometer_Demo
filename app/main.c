@@ -94,6 +94,8 @@ void DelayResolution100us(Int32U Dly)
  *************************************************************************/
 void position(void);
 void move_end_check(void);
+void data_transfer(void);
+
 void main(void)
 {
 
@@ -132,158 +134,17 @@ void main(void)
   }
   while(1)
   {
-    if(Accl_Get(&X,&Y,&Z))
-    {
-      
-      YPos=YPos+YVel;
-      YVel=YVel+Y;
-      
-      ZPos=ZPos+ZVel;
-      ZVel=ZVel+Z;
-      // normalization and calculate angle between the board and the horizontal plain
-      if(Y > 1023)
-      {
-        Y = 1023;
-      }
-      else if (Y < -1023)
-      {
-        Y = -1023;
-      }
-      Deg = (Flo32)Y/1023.0;
-      Deg = asin(Deg);
-      if (Deg >= 0)
-      {
-        if (Z < 0)
-        {
-          Deg = 3.14 - Deg;
-        }
-      }
-      else
-      {
-        if (Z < 0)
-        {
-          Deg = -3.14 - Deg;
-        }
-      }
-      DegShow = (Int32S)((Deg*180.0)/(3.14));
-      YGrav=sin(Deg)*961;
-      YVel=YVel-(Int16S)YGrav;
-      
-      if(X > 1023)
-      {
-        X = 1023;
-      }
-      else if (X < -1023)
-      {
-        X = -1023;
-      }
-      DegX = (Flo32)X/1023.0;
-      DegX = asin(DegX);
-      if (DegX >= 0)
-      {
-        if (Z < 0)
-        {
-          DegX = 3.14 - DegX;
-        }
-      }
-      else
-      {
-        if (Z < 0)
-        {
-          DegX = -3.14 - DegX;
-        }
-      }
-      DegShowX=(Int32S)((DegX*180.0)/(3.14));
-      XGrav=sin(DegX)*1025;
-      XPos=XPos+XVel;
-      B=XPos;
-      if(0<X && X<50)
-      {
-      }
-      else
-      {
-        XVel=XVel+X-28;
-      }
-      
-      A=(Int32S)XGrav;
-      //B=(Int32S)DegX;
-      C=XVel;
-      position();
-      A=accX[1];
-      B=velX[1];
-      C=posX[1];
-      if(TRUE)//DegShow != DegShow_h
-      {
-        DegShow_h = DegShow;
-        NewData = TRUE;
-        if(SysTickFl) //
-        {
-          SysTickFl = FALSE;
-          //GLCD_TextSetPos(0,0);
-          //GLCD_print("\fPosition :");
-          //GLCD_TextSetPos(0,0);
-          //GLCD_print("\f%d,%d,%d,%d Deg\r\n",XPos,YPos,ZPos, DegShow);
-          //GLCD_TextSetPos(2,0);
-          //GLCD_print("\fVelocity :");
-          GLCD_TextSetPos(0,0);
-          GLCD_print("\f%d, %d, %d, %d Deg\r\n",A, B, C, X);
-        }
-      }
-      else if (StepMotorDone())
-      {
-        // reduce power consumption
-        StepMotorStop();
-      }
-    }
+    position();
+    A = accX[1];
+    B = velX[1];
+    C = posX[1];
 
-    if (   StepMotorDone()
-        && NewData)
+    if(SysTickFl) //
     {
-      // Apply compensation
-      NewData = FALSE;
-      Delta = (Int32S)MotorDeg;
-      Delta = DegShow - Delta;
-      if(Dir = Delta < 0)
-      {
-        Delta = -Delta;
-      }
-      if(Delta > 180)
-      {
-        Dir = !Dir;
-        do
-        {
-          Delta = 360 - Delta;
-          if (Delta < 0)
-          {
-            Delta = -Delta;
-          }
-        }
-        while(Delta >= 360);
-      }
-
-      Steps = StepMotorDeg2Steps ((Flo32)Delta);
-      if(Steps)
-      {
-        StepMotorSet(1000,!Dir);
-        StepMotorRun(Steps);
-        if(Dir)
-        {
-          MotorDeg -= StepMotorSteps2Deg(Steps);
-        }
-        else
-        {
-          MotorDeg += StepMotorSteps2Deg(Steps);
-        }
-        if(MotorDeg > 180.0)
-        {
-          MotorDeg = MotorDeg - 360;
-        }
-        else if(MotorDeg < -180.0)
-        {
-          MotorDeg = MotorDeg + 360;
-        }
-      }
-    }
+        SysTickFl = FALSE;
+        GLCD_TextSetPos(0,0);
+        GLCD_print("\f%d, %d, %d, %d Deg\r\n",A, B, C, X);
+    }          
   }
 }
 
@@ -291,50 +152,57 @@ void position(void)
 {
   unsigned int count1;
   count1 = 0;
-  accX[1]=0;
-  accY[1]=0;
+  accX[1] = 0;
+  accY[1] = 0;
   do
   {
     Accl_Get(&X,&Y,&Z);
-    accX[1]=accX[1]+X;
-    accY[1]=accY[1]+Y;
+    accX[1] = accX[1] + X;
+    accY[1] = accY[1] + Y;
     count1++;
-  }while (count1!=64); // 64 sums of the acceleration sample
+  }while (count1 != 64); // 64 sums of the acceleration sample
     
     accX[1]=accX[1]>>6; //Div by 64
     accY[1]=accY[1]>>6;
     
+<<<<<<< HEAD
     accX[1]=accX[1]-30; //Remove the offset due to gravity
     accY[1]=accY[1]-6;
     
     if ((accX[1] <=10)&&(accX[1] >= -10)) //Discrimination window applied
+=======
+    accX[1] = accX[1] - 28; //Remove the offset due to gravity
+    accY[1] = accY[1] - 6;
+    
+    if ((accX[1] <= 6)&&(accX[1] >= -6)) //Discrimination window applied
+>>>>>>> origin/master
       {accX[1] = 0;} // to the X axis acceleration
       //variable
 
-    if ((accY[1] <=3)&&(accY[1] >= -3))
+    if ((accY[1] <= 3)&&(accY[1] >= -3))
       {accY[1] = 0;} 
     
     //First integration:
-    velX[1]=velX[0] + accX[0] + ((accX[1]-accX[0])>>1);
-    velY[1]=velY[0] + accY[0] + ((accY[1]-accY[0])>>1);
+    velX[1] = velX[0] + accX[0] + ((accX[1] - accX[0])>>1);
+    velY[1] = velY[0] + accY[0] + ((accY[1] - accY[0])>>1);
     
     //Second integration:
-    posX[1]=posX[0] + velX[0] + ((velX[1]-velX[0])>>1);
-    posY[1]=posY[0] + velY[0] + ((velY[1] - velY[0])>>1);
+    posX[1] = posX[0] + velX[0] + ((velX[1] - velX[0])>>1);
+    posY[1] = posY[0] + velY[0] + ((velY[1] - velY[0])>>1);
     
     //Current values sent to previous values
-    accX[0]=accX[1];
-    accY[0]=accY[1];
-    velX[0]=velX[1];
-    velY[0]=velY[1];
+    accX[0] = accX[1];
+    accY[0] = accY[1];
+    velX[0] = velX[1];
+    velY[0] = velY[1];
     
     //posX[1]=posX[1]>>10; //Sensibility adjustment
-    posY[1]=posY[1]>>18;
+    posY[1] = posY[1]>>18;
     
     //data_tranfer();
     
     //posX[1]=posX[1]<<18; //Return original value
-    posY[1]=posY[1]<<18;    
+    posY[1] = posY[1]<<18;    
     
     move_end_check();
     
@@ -346,9 +214,10 @@ void position(void)
 
 void move_end_check(void)
 {
-  if (accX[1]==0) //Count number of acceleration samples equal to zero
+  if (accX[1] == 0) //Count number of acceleration samples equal to zero
   {countX++;}
-  else {countX=0;}
+  else 
+  {countX=0;}
   
   if (countX >= 25) //if this number exceeds 25, we assume that veocity i zero
   {
@@ -366,3 +235,27 @@ void move_end_check(void)
     velY[0]=0;
   }
 }
+
+/*void data_transfer(void)
+{
+  signed long positionXbkp, positionYbkp;
+  unsigned int delay;
+  unsigned char posx_seg[4], posy_Sef[4];
+  
+  if (positionX[1] >= 0) //Compares the sign of the X direction data
+  {
+    direction = (direction | 0x10); // if it's positive the most significant byte 
+    posx_seg[0] = positionX[1] & 0x000000FF; // is set to 1 else it is set to 8
+    posx_seg[1] = (positionX[1] >> 8) & 0x000000FF; //the data is also managed in the
+    // subsequent lines in order to
+    posx_seg[2] = (positionX[1] >> 16) & 0x000000FF; // be sent. The 32 bit variable must be
+    posx_seg[3] = (positionX[1] >> 24) & 0x000000FF; // split into 4 different 8 bit
+    // variables in order to be sent via the 8 bit SCI frame
+
+  }
+  else
+  {
+    direction = (direction | 0x80);
+  }
+    
+} */
