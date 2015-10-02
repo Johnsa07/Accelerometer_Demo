@@ -135,11 +135,11 @@ void main(void)
     if(Accl_Get(&X,&Y,&Z))
     {
       
-      YPos=YPos+YVel;
-      YVel=YVel+Y;
+      YPos = YPos + YVel;
+      YVel = YVel + Y;
       
-      ZPos=ZPos+ZVel;
-      ZVel=ZVel+Z;
+      ZPos = ZPos + ZVel;
+      ZVel = ZVel + Z;
       // normalization and calculate angle between the board and the horizontal plain
       if(Y > 1023)
       {
@@ -166,8 +166,8 @@ void main(void)
         }
       }
       DegShow = (Int32S)((Deg*180.0)/(3.14));
-      YGrav=sin(Deg)*961;
-      YVel=YVel-(Int16S)YGrav;
+      YGrav = sin(Deg)*961;
+      YVel = YVel - (Int16S)YGrav;
       
       if(X > 1023)
       {
@@ -193,25 +193,25 @@ void main(void)
           DegX = -3.14 - DegX;
         }
       }
-      DegShowX=(Int32S)((DegX*180.0)/(3.14));
-      XGrav=sin(DegX)*1025;
-      XPos=XPos+XVel;
-      B=XPos;
-      if(0<X && X<50)
+      DegShowX = (Int32S)((DegX*180.0)/(3.14));
+      XGrav = sin(DegX)*1025;
+      XPos = XPos + XVel;
+      B = XPos;
+      if(0 < X && X < 50)
       {
       }
       else
       {
-        XVel=XVel+X-28;
+        XVel = XVel + X - 28;
       }
       
-      A=(Int32S)XGrav;
+      A = (Int32S)XGrav;
       //B=(Int32S)DegX;
-      C=XVel;
+      C = XVel;
       position();
-      A=accX[1];
-      B=velX[1];
-      C=posX[1];
+      A = accX[1];
+      B = velX[1];
+      C = posX[1];
       if(TRUE)//DegShow != DegShow_h
       {
         DegShow_h = DegShow;
@@ -291,50 +291,50 @@ void position(void)
 {
   unsigned int count1;
   count1 = 0;
-  accX[1]=0;
-  accY[1]=0;
+  accX[1] = 0;
+  accY[1] = 0;
   do
   {
     Accl_Get(&X,&Y,&Z);
-    accX[1]=accX[1]+X;
-    accY[1]=accY[1]+Y;
+    accX[1] = accX[1] + X;
+    accY[1] = accY[1] + Y;
     count1++;
-  }while (count1!=64); // 64 sums of the acceleration sample
+  }while (count1 != 64); // 64 sums of the acceleration sample
     
     accX[1]=accX[1]>>6; //Div by 64
     accY[1]=accY[1]>>6;
     
-    accX[1]=accX[1]-28; //Remove the offset due to gravity
-    accY[1]=accY[1]-6;
+    accX[1] = accX[1] - 28; //Remove the offset due to gravity
+    accY[1] = accY[1] - 6;
     
-    if ((accX[1] <=6)&&(accX[1] >= -6)) //Discrimination window applied
+    if ((accX[1] <= 6)&&(accX[1] >= -6)) //Discrimination window applied
       {accX[1] = 0;} // to the X axis acceleration
       //variable
 
-    if ((accY[1] <=3)&&(accY[1] >= -3))
+    if ((accY[1] <= 3)&&(accY[1] >= -3))
       {accY[1] = 0;} 
     
     //First integration:
-    velX[1]=velX[0] + accX[0] + ((accX[1]-accX[0])>>1);
-    velY[1]=velY[0] + accY[0] + ((accY[1]-accY[0])>>1);
+    velX[1] = velX[0] + accX[0] + ((accX[1] - accX[0])>>1);
+    velY[1] = velY[0] + accY[0] + ((accY[1] - accY[0])>>1);
     
     //Second integration:
-    posX[1]=posX[0] + velX[0] + ((velX[1]-velX[0])>>1);
-    posY[1]=posY[0] + velY[0] + ((velY[1] - velY[0])>>1);
+    posX[1] = posX[0] + velX[0] + ((velX[1] - velX[0])>>1);
+    posY[1] = posY[0] + velY[0] + ((velY[1] - velY[0])>>1);
     
     //Current values sent to previous values
-    accX[0]=accX[1];
-    accY[0]=accY[1];
-    velX[0]=velX[1];
-    velY[0]=velY[1];
+    accX[0] = accX[1];
+    accY[0] = accY[1];
+    velX[0] = velX[1];
+    velY[0] = velY[1];
     
     //posX[1]=posX[1]>>10; //Sensibility adjustment
-    posY[1]=posY[1]>>18;
+    posY[1] = posY[1]>>18;
     
     //data_tranfer();
     
     //posX[1]=posX[1]<<18; //Return original value
-    posY[1]=posY[1]<<18;    
+    posY[1] = posY[1]<<18;    
     
     move_end_check();
     
@@ -348,7 +348,8 @@ void move_end_check(void)
 {
   if (accX[1]==0) //Count number of acceleration samples equal to zero
   {countX++;}
-  else {countX=0;}
+  else 
+  {countX=0;}
   
   if (countX >= 25) //if this number exceeds 25, we assume that veocity i zero
   {
