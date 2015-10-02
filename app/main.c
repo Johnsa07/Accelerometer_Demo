@@ -304,10 +304,10 @@ void position(void)
     accX[1]=accX[1]>>6; //Div by 64
     accY[1]=accY[1]>>6;
     
-    accX[1]=accX[1]-28; //Remove the offset due to gravity
+    accX[1]=accX[1]-30; //Remove the offset due to gravity
     accY[1]=accY[1]-6;
     
-    if ((accX[1] <=6)&&(accX[1] >= -6)) //Discrimination window applied
+    if ((accX[1] <=10)&&(accX[1] >= -10)) //Discrimination window applied
       {accX[1] = 0;} // to the X axis acceleration
       //variable
 
