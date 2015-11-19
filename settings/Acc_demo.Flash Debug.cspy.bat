@@ -25,7 +25,7 @@ if not "%1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\settings\Acc_demo.Flash Debug.general.xcl" --backend -f "C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\settings\Acc_demo.Flash Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\settings\Acc_demo.Flash Debug.general.xcl" --backend -f "C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\settings\Acc_demo.Flash Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\settings\Acc_demo.Flash Debug.general.xcl" "--debug_file=%1" --backend -f "C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\settings\Acc_demo.Flash Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\settings\Acc_demo.Flash Debug.general.xcl" "--debug_file=%1" --backend -f "C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\settings\Acc_demo.Flash Debug.driver.xcl" 
 
 @echo off 
 :end

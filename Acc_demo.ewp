@@ -136,7 +136,7 @@
         </option>
         <option>
           <name>OGUseCmsisDspLib</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>GRuntimeLibThreads</name>
@@ -625,6 +625,11 @@
       </data>
     </settings>
     <settings>
+      <name>Coder</name>
+      <archiveVersion>0</archiveVersion>
+      <data/>
+    </settings>
+    <settings>
       <name>CUSTOM</name>
       <archiveVersion>3</archiveVersion>
       <data>
@@ -703,7 +708,7 @@
         </option>
         <option>
           <name>IlinkMapFile</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>IlinkLogFile</name>
@@ -1023,6 +1028,18 @@
       <name>StepMotor</name>
       <file>
         <name>$PROJ_DIR$\app\step_motor_drv.c</name>
+      </file>
+    </group>
+    <group>
+      <name>VCBMLC</name>
+      <file>
+        <name>$PROJ_DIR$\carcontrol.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\carcontrol.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\feedback.c</name>
       </file>
     </group>
   </group>

@@ -1110,6 +1110,18 @@
         <name>$PROJ_DIR$\app\step_motor_drv.c</name>
       </file>
     </group>
+    <group>
+      <name>VCBMLC</name>
+      <file>
+        <name>$PROJ_DIR$\carcontrol.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\carcontrol.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\feedback.c</name>
+      </file>
+    </group>
   </group>
   <group>
     <name>Pictures</name>

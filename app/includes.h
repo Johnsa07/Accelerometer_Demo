@@ -29,6 +29,8 @@
 #include "drv_glcd.h"
 #include "glcd_ll.h"
 #include "iar_logo.h"
+#include "carcontrol.h"
+#include "feedback.h"
 
 #include "step_motor_drv.h"
 #include "i2c1_drv.h"
