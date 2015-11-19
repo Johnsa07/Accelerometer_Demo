@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <intrinsics.h>
+#include <iostream.h>
 
 //#include "stm32f10x_conf.h"
 #include "stm32f10x.h"
@@ -31,6 +32,7 @@
 #include "iar_logo.h"
 #include "carcontrol.h"
 #include "feedback.h"
+#include "machinelearning.h"
 
 #include "step_motor_drv.h"
 #include "i2c1_drv.h"
