@@ -1,5 +1,7 @@
 #include "includes.h"
 
+
+
 int currentState;
 char desiredState;
 int nextState;
@@ -139,7 +141,7 @@ int maxNextQ(int action){
 }
 
 int calcQ(int action){
-	return static_cast<int>(directReward(action) + gammah*maxNextQ(action));
+	return directReward(action) + gammah*maxNextQ(action);
 }
 
 /* void moveCar(int action){
@@ -280,4 +282,4 @@ void initialize(){
 	room[carY][carX] = 1; //Initializing starting position for car
 	//room[blockY][blockX] = 2;
 	//currentState = 3;
-}}
+}
