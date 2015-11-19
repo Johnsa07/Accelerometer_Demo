@@ -114,7 +114,7 @@ long position(void);
 void move_end_check(void);
 void data_transfer(void);
 
-void main(void)
+ void main(void)
 {
 
   ENTR_CRT_SECTION();

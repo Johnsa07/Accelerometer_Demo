@@ -1121,6 +1121,15 @@
       <file>
         <name>$PROJ_DIR$\feedback.c</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$\feedback.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\machinelearning.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\machinelearning.h</name>
+      </file>
     </group>
   </group>
   <group>

@@ -1,14 +1,4 @@
 #include "includes.h"
-const char *FS="Forward straight";
-const char *BS="Backwards straight";
-const char *SS="Stop straight";
-const char *FR="Forward right";
-const char *FL="Forward left";
-const char *BL="Backwards left";
-const char *BR="Backwards right";
-const char *SR="Stop right";
-const char *SL="Stop left";
-
 
 #define CAR_PORT   GPIOE
 #define CAR_FORWARD_MASK   GPIO_Pin_2
@@ -135,8 +125,42 @@ void StopTurn(void)
         GPIO_ResetBits(CAR_PORT, CAR_RIGHT_MASK); //Set bit for not going backwards
 }
 
+void GoCar(car_state command)
+{
+  if (command == 0){
+    StopTurn();
+    Forward();
+  }
+  else if (command == 1){
+    Right();
+    Forward();
+  }
+    else if (command == 2){
+    Left();
+    Forward();
+  }
+    else if (command == 4){
+    StopTurn();
+    Backwards();
+  }
+      else if (command == 5){
+    Right();
+    Backwards();
+  }
+      else if (command == 6){
+    Left();
+    Backwards();
+  }  else {
+    StopTurn();
+    Stop();
+  }
+    
+
+}
+
 void GoCar(int Test, int TestTurn)
 {    //Control speed
+  
     if (Test==1) 
     {
       Forward();
