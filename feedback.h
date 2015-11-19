@@ -6,5 +6,6 @@
     car_stop = 3,         /**< No movement */
     car_back = 4,                /**< Straight Back */
     car_backR = 5,              /**< Right Back */
-    car_backL = 6           /**< Left Back */
+    car_backL = 6,           /**< Left Back */
+    car_error = 7
   } car_state;

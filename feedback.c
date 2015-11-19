@@ -64,11 +64,20 @@ car_state XV;
 
 if (accX[1] == 0 && accY[1] == 0)
 {return car_stop;}
-   else if (accX[1] > 40 && accY[1] == 0)
+   else if (accX[1] > 0 && accY[1] == 0)
   {return car_fw;}
+   else if (accX[1] < 0 && accY[1] == 0)
+  {return car_back;}
+   else if (accX[1] > 0 && accY[1] > 0)
+  {return car_fwR;}
+   else if (accX[1] > 0 && accY[1] < 0)
+  {return car_fwL;}
+   else if (accX[1] < 0 && accY[1] > 0)
+  {return car_backR;}
+   else if (accX[1] < 0 && accY[1] < 0)
+  {return car_backL;}
   else
-    {return car_back;}
-    
+  {return car_error;}
 }
 
 void move_end_check(void)

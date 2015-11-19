@@ -1,18 +1,18 @@
-"C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\app\step_motor_drv.c"
+"C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\app\step_motor_drv.c"
 -std=c99
 -ferror-limit=100
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\app
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\app
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\board
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\board
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\modules
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\modules
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\..\library\CMSIS\CM3\DeviceSupport\ST\STM32F10x
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\..\library\CMSIS\CM3\DeviceSupport\ST\STM32F10x
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\..\Library\STM32F10x_StdPeriph_Driver\inc
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\..\Library\STM32F10x_StdPeriph_Driver\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\CMSIS\Include
 -I
@@ -20,13 +20,13 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\inc\c
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\app
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\app
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\board
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\board
 -I
-C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\PROJ\modules
+C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\modules
 -I
 C:\Users\Alexander\Documents\IAR Embedded Workbench\test\arm\7.40.3\ST\STM32F10x\IAR-STM32F107VC-SK\library\CMSIS\CM3\DeviceSupport\ST\STM32F10x
 -I
